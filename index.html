@@ -1,0 +1,837 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="비개발자를 위한 Claude Code · Git 설치 가이드. Windows와 macOS 각각의 설치부터 로그인까지.">
+<meta property="og:title" content="Claude Code 설치 가이드">
+<meta property="og:description" content="비개발자를 위한 Claude Code · Git 설치 가이드 — Windows / macOS">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+<title>Claude Code 설치 가이드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<style>
+:root{
+  --paper:#ffffff;
+  --ink:#141414;
+  --red:#E4002B;
+  --rule:#E3E3E3;
+  --muted:#6E6E6E;
+  --dark:#171717;
+  --canvas:#7E7E80;
+  --sans:"Pretendard Variable",Pretendard,"Noto Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --mono:"IBM Plex Mono",Consolas,Menlo,"D2Coding",ui-monospace,monospace;
+  --monokr:"IBM Plex Mono","Noto Sans KR",Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{background:var(--canvas)}
+body{margin:0;background:var(--canvas);color:var(--ink);font-family:var(--sans);overflow-x:auto}
+
+.deck{width:1000px;margin:0 auto;zoom:var(--z,1);display:flex;flex-direction:column;gap:26px;padding:26px 0 70px}
+
+.slide{
+  position:relative;width:1000px;height:563px;flex:none;
+  background:var(--paper);color:var(--ink);
+  border-left:8px solid var(--red);
+  padding:42px 62px 0 58px;
+  display:flex;flex-direction:column;overflow:hidden;
+  box-shadow:0 3px 20px rgba(0,0,0,.30);
+}
+.slide.dark{background:var(--dark);color:#fff}
+
+.kicker{font-family:var(--monokr);font-size:11.5px;font-weight:500;letter-spacing:.2em;color:var(--red);text-transform:uppercase;margin:0 0 9px}
+.slide h1{font-size:31px;font-weight:700;letter-spacing:-.022em;line-height:1.26;text-wrap:balance;margin:0}
+.slide.dark h1{font-size:44px;line-height:1.18}
+.sub{font-size:14.5px;color:var(--muted);margin:14px 0 0;line-height:1.6}
+.slide.dark .sub{color:#A8A8A8}
+.rule{height:1px;background:var(--rule);margin:17px 0 20px;flex:none}
+.body{flex:1;min-height:0}
+
+.foot{position:absolute;left:58px;right:62px;bottom:20px;display:flex;justify-content:space-between;
+  font-family:var(--monokr);font-size:10.5px;letter-spacing:.06em;color:#A0A0A0;font-variant-numeric:tabular-nums}
+.slide.dark .foot{color:#6A6A6A}
+
+table{width:100%;border-collapse:collapse;font-size:13.5px;line-height:1.55}
+th{text-align:left;font-weight:700;font-size:13px;padding:0 0 9px;border-bottom:2px solid var(--red);vertical-align:bottom}
+td{padding:11px 0;border-bottom:1px solid var(--rule);vertical-align:top;color:#2B2B2B}
+th+th,td+td{padding-left:22px}
+td.mono,th.mono{font-family:var(--mono);font-size:12.5px}
+
+.steps{display:flex;flex-direction:column;gap:0}
+.step{display:grid;grid-template-columns:34px 1fr auto;gap:0 16px;align-items:baseline;
+  padding:11px 0;border-bottom:1px solid var(--rule)}
+.step:first-child{border-top:2px solid var(--red)}
+.step .n{font-family:var(--mono);font-size:13px;color:var(--red);font-weight:500}
+.step .t{font-size:14.5px;font-weight:500}
+.step .t em{font-style:normal;font-family:var(--mono);font-size:12.5px;color:#3A3A3A;background:#F2F2F2;padding:1px 6px;border-radius:3px}
+.step .d{font-size:12.5px;color:var(--muted);text-align:right;max-width:330px;line-height:1.5}
+
+.note{border-left:3px solid var(--red);padding:11px 0 11px 15px;font-size:13px;line-height:1.62;color:#2B2B2B;background:#FAFAFA}
+.note b{font-weight:700}
+.note .h{display:block;font-family:var(--monokr);font-size:10.5px;letter-spacing:.16em;color:var(--red);text-transform:uppercase;margin-bottom:5px}
+
+.code{font-family:var(--mono);font-size:14px;background:#111;color:#fff;padding:13px 16px;border-radius:5px;
+  overflow-x:auto;white-space:pre;line-height:1.5}
+
+.term{border-radius:6px;overflow:hidden;font-family:var(--mono);box-shadow:0 1px 8px rgba(0,0,0,.18)}
+.term-bar{background:#2C2C2C;color:#D8D8D8;font-size:10.5px;padding:0;display:flex;align-items:stretch;height:26px}
+.term-tab{background:#0C0C0C;color:#fff;padding:0 16px;display:flex;align-items:center;gap:7px;font-size:10.5px}
+.term-tab.admin{color:#FFD37A}
+.term-body{background:#0C0C0C;color:#CCCCCC;padding:13px 15px;font-size:12.3px;line-height:1.62;white-space:pre-wrap;word-break:break-all}
+.term-body .p{color:#FFFFFF}
+.term-body .g{color:#6FD26F}
+.term-body .d{color:#7D7D7D}
+.term-body .e{color:#FF7B7B}
+.term-body .y{color:#E8C46A}
+.mocklabel{font-family:var(--monokr);font-size:10px;letter-spacing:.14em;color:#A0A0A0;text-transform:uppercase;margin:7px 0 0;text-align:right}
+
+.winmenu{background:#F3F3F3;border:1px solid #D6D6D6;border-radius:7px;padding:5px;font-size:12.5px;box-shadow:0 3px 12px rgba(0,0,0,.14)}
+.winmenu div{padding:6px 12px;border-radius:4px;color:#333}
+.winmenu div.hi{background:var(--red);color:#fff;font-weight:700}
+.winmenu div.hi2{background:#E8E8E8;color:#111;font-weight:500}
+.uac{background:#F3F3F3;border:1px solid #D0D0D0;border-radius:8px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.14)}
+.uac .t{background:#0067C0;color:#fff;font-size:12px;padding:8px 13px;font-weight:500}
+.uac .c{padding:14px 16px;font-size:12.5px;line-height:1.55;color:#222}
+.uac .c b{display:block;font-size:13.5px;margin-bottom:9px}
+.uac .btns{display:flex;gap:8px;padding:0 16px 14px}
+.uac .btns span{font-size:12px;padding:5px 20px;border:1px solid #B8B8B8;border-radius:4px;background:#FBFBFB}
+.uac .btns span.pri{background:var(--red);border-color:var(--red);color:#fff;font-weight:700}
+
+.cols{display:grid;gap:26px}
+.c2{grid-template-columns:1fr 1fr}
+.c2u{grid-template-columns:1fr 1.25fr}
+.c2v{grid-template-columns:1.3fr 1fr}
+.stack{display:flex;flex-direction:column;gap:14px}
+.h3{font-size:13.5px;font-weight:700;margin:0 0 9px;padding-bottom:7px;border-bottom:2px solid var(--red)}
+.list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px;font-size:13.5px;line-height:1.6;color:#2B2B2B}
+.list li{padding-left:15px;position:relative}
+.list li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;background:var(--red)}
+.list code,.inl{font-family:var(--mono);font-size:12.5px;background:#F2F2F2;padding:1px 5px;border-radius:3px}
+
+.cover{justify-content:center}
+.cover .meta{position:absolute;left:58px;bottom:58px;font-family:var(--monokr);font-size:11px;letter-spacing:.18em;color:#7A7A7A}
+.ring{position:absolute;right:78px;bottom:76px;width:88px;height:88px;border:1.5px solid var(--red);border-radius:50%}
+
+.check{display:flex;flex-direction:column;gap:0}
+.check div{display:grid;grid-template-columns:22px 1fr;gap:14px;align-items:baseline;padding:13px 0;border-bottom:1px solid #2E2E2E;font-size:15px}
+.check div:first-child{border-top:2px solid var(--red)}
+.check .b{color:var(--red);font-family:var(--mono);font-size:14px}
+.check .m{font-family:var(--mono);font-size:13px;color:#9C9C9C;display:block;margin-top:4px}
+
+/* macOS Terminal.app 기본 프로필 재현 */
+.mterm{border:1px solid #C4C4C4;border-radius:8px;overflow:hidden;font-family:var(--mono);box-shadow:0 2px 12px rgba(0,0,0,.16)}
+.mterm-bar{background:linear-gradient(#EDEDED,#D9D9D9);border-bottom:1px solid #BEBEBE;height:26px;display:flex;align-items:center;padding:0 10px;gap:6px;position:relative}
+.dot{width:11px;height:11px;border-radius:50%;flex:none}
+.dot.r{background:#FF5F57}.dot.y{background:#FEBC2E}.dot.g{background:#28C840}
+.mterm-title{position:absolute;left:0;right:0;text-align:center;font-family:var(--sans);font-size:11px;color:#4A4A4A;font-weight:500}
+.mterm-body{background:#FFFFFF;color:#1A1A1A;padding:13px 15px;font-size:12.3px;line-height:1.62;white-space:pre-wrap;word-break:break-all}
+.mterm-body .p{color:#000;font-weight:500}
+.mterm-body .g{color:#12742C}
+.mterm-body .d{color:#767676}
+.mterm-body .e{color:#C42B2B}
+.mterm-body .y{color:#8A5D00}
+.mocklabel{font-family:var(--monokr);font-size:10px;letter-spacing:.14em;color:#A0A0A0;text-transform:uppercase;margin:7px 0 0;text-align:right}
+
+/* macOS UI mocks */
+.spot{background:rgba(246,246,246,.98);border:1px solid #D0D0D0;border-radius:10px;overflow:hidden;box-shadow:0 5px 18px rgba(0,0,0,.18)}
+.spot .q{display:flex;align-items:center;gap:9px;padding:11px 14px;font-size:15px;border-bottom:1px solid #DEDEDE;color:#111}
+.spot .q i{font-style:normal;color:#8A8A8A;font-size:13px}
+.spot .sec{font-size:10.5px;color:#8A8A8A;padding:7px 14px 3px;font-weight:700}
+.spot .row{display:flex;align-items:center;gap:9px;padding:7px 14px;font-size:12.5px}
+.spot .row.hi{background:var(--red);color:#fff;font-weight:700}
+.spot .row span.k{font-size:11px;opacity:.75;font-weight:400}
+
+.mdlg{background:#F1F1F1;border:1px solid #CFCFCF;border-radius:11px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,.2);padding:17px 20px;text-align:center}
+.mdlg b{display:block;font-size:12.5px;margin-bottom:7px;line-height:1.5}
+.mdlg p{font-size:11.5px;color:#4A4A4A;margin:0 0 13px;line-height:1.5}
+.mdlg .btns{display:flex;gap:8px;justify-content:center}
+.mdlg .btns span{font-size:11.5px;padding:5px 16px;border-radius:5px;background:#fff;border:1px solid #C6C6C6;color:#222}
+.mdlg .btns span.pri{background:var(--red);border-color:var(--red);color:#fff;font-weight:700}
+
+.kbd{font-family:var(--mono);font-size:12px;background:#fff;border:1px solid #C9C9C9;border-bottom-width:2px;border-radius:4px;padding:1px 7px;color:#222;white-space:nowrap}
+
+
+[hidden]{display:none!important}
+.tabs{position:sticky;top:0;z-index:10;display:flex;justify-content:center;background:#141414;
+  box-shadow:0 1px 0 #000}
+.tab{appearance:none;border:0;background:transparent;color:#8A8A8A;font-family:var(--sans);
+  font-size:13px;font-weight:700;letter-spacing:.02em;padding:13px 32px;cursor:pointer;
+  border-bottom:3px solid transparent;transition:color .12s}
+.tab:hover{color:#DADADA}
+.tab[aria-selected="true"]{color:#fff;border-bottom-color:var(--red)}
+.tab:focus-visible{outline:2px solid var(--red);outline-offset:-4px}
+
+@media print{
+  .tabs{display:none}
+  html,body{background:#fff}
+  .deck{zoom:1;gap:0;padding:0}
+  .slide{box-shadow:none;break-after:page;page-break-after:always}
+  @page{size:1000px 563px;margin:0}
+}
+</style>
+</head>
+<body>
+
+
+<nav class="tabs" role="tablist" aria-label="운영체제 선택">
+  <button class="tab" role="tab" data-deck="win" aria-controls="win" aria-selected="true">Windows</button>
+  <button class="tab" role="tab" data-deck="mac" aria-controls="mac" aria-selected="false">macOS</button>
+</nav>
+
+<div class="deck" id="win">
+
+<!-- 01 COVER -->
+<section class="slide dark cover">
+  <p class="kicker">사내 교육 자료 · CLAUDE CODE STUDY</p>
+  <h1>Claude Code 설치 가이드<br>Windows</h1>
+  <p class="sub">PowerShell로 Git과 Claude Code를 설치하고, 설치를 확인하는 데까지 — 6단계.</p>
+  <div class="ring"></div>
+  <div class="meta">WINDOWS 10 (1809+) / 11 · 약 15분</div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>01 / 12</span></div>
+</section>
+
+<!-- 02 OVERVIEW -->
+<section class="slide">
+  <p class="kicker">설치 흐름 · OVERVIEW</p>
+  <h1>6단계, 직접 입력하는 명령은 두 줄뿐입니다</h1>
+  <div class="rule"></div>
+  <div class="body">
+    <div class="steps">
+      <div class="step"><span class="n">①</span><span class="t">PowerShell 열기</span><span class="d">관리자 권한 없이 그냥 엽니다</span></div>
+      <div class="step"><span class="n">②</span><span class="t">Git 설치 — <em>winget install …</em></span><span class="d">승인 창이 한 번 뜹니다</span></div>
+      <div class="step"><span class="n">③</span><span class="t">Claude Code 설치 — <em>irm … | iex</em></span><span class="d">관리자 권한 불필요</span></div>
+      <div class="step"><span class="n">④</span><span class="t">PowerShell 껐다 켜기</span><span class="d">건너뛰면 ⑤에서 막힙니다</span></div>
+      <div class="step"><span class="n">⑤</span><span class="t">설치 확인 — <em>claude --version</em></span><span class="d">버전 번호가 나오면 성공</span></div>
+      <div class="step"><span class="n">⑥</span><span class="t">로그인 — <em>claude</em></span><span class="d">브라우저로 계정 인증</span></div>
+    </div>
+    <div class="note" style="margin-top:18px">
+      <span class="h">관리자 권한</span>
+      Claude Code 설치 자체는 <b>관리자 권한이 필요 없습니다.</b> 승인 창이 뜨는 건 ②번 Git 설치 한 번뿐이고, 그때 <b>[예]</b>만 누르면 됩니다.
+    </div>
+  </div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>02 / 12</span></div>
+</section>
+
+<!-- 03 POWERSHELL VS CMD -->
+<section class="slide">
+  <p class="kicker">① 터미널 선택 · POWERSHELL vs CMD</p>
+  <h1>둘 다 되지만, PowerShell 기준으로 안내합니다</h1>
+  <div class="rule"></div>
+  <div class="body">
+    <table>
+      <tr><th style="width:130px">구분</th><th style="width:400px">PowerShell <span style="color:var(--red)">— 권장</span></th><th>CMD (명령 프롬프트)</th></tr>
+      <tr><td>여는 방법</td><td>Win + X → <b>터미널</b></td><td>검색창에 <span class="inl">cmd</span> 입력</td></tr>
+      <tr><td>프롬프트 모양</td><td class="mono">PS C:\Users\hong&gt;</td><td class="mono">C:\Users\hong&gt;</td></tr>
+      <tr><td>설치 명령</td><td class="mono">irm https://claude.ai/install.ps1 | iex</td><td class="mono">curl -fsSL https://claude.ai/install.cmd -o install.cmd &amp;&amp; install.cmd &amp;&amp; del install.cmd</td></tr>
+      <tr><td>설치 결과</td><td colspan="2" style="padding-left:22px"><b>완전히 동일합니다</b> — 같은 프로그램이 같은 위치에 설치됩니다</td></tr>
+    </table>
+    <div class="note" style="margin-top:20px">
+      <span class="h">왜 PowerShell인가</span>
+      Windows 11에서 터미널을 열면 <b>기본이 PowerShell</b>이라 별도로 바꿀 게 없습니다. 명령을 붙여넣기 전에 <b>프롬프트 맨 앞에 <span class="inl">PS</span>가 있는지</b>만 확인하세요. <span class="inl">PS</span>가 없으면 CMD이므로, 위 표의 오른쪽 명령을 써야 합니다.
+    </div>
+  </div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>03 / 12</span></div>
+</section>
+
+<!-- 04 STEP 1 OPEN -->
+<section class="slide">
+  <p class="kicker">STEP ① · 터미널 열기</p>
+  <h1>Win + X 를 누르고 '터미널'을 선택합니다</h1>
+  <div class="rule"></div>
+  <div class="body">
+    <div class="cols c2u">
+      <div>
+        <div class="winmenu">
+          <div>앱 및 기능</div>
+          <div>전원 옵션</div>
+          <div>장치 관리자</div>
+          <div>컴퓨터 관리</div>
+          <div class="hi">터미널</div>
+          <div class="hi2">터미널(관리자)</div>
+          <div>작업 관리자</div>
+          <div>설정</div>
+        </div>
+        <p class="mocklabel">화면 예시 · Win + X 메뉴</p>
+      </div>
+      <div class="stack">
+        <div class="term">
+          <div class="term-bar"><div class="term-tab">Windows PowerShell</div></div>
+          <div class="term-body"><span class="p">PS C:\Users\hong&gt; </span><span class="d">_</span></div>
+        </div>
+        <div class="note">
+          <span class="h">관리자 권한이 필요할 때</span>
+          기본은 그냥 <b>터미널</b>입니다. 권한 오류가 나면 <b>터미널(관리자)</b>로 다시 열고, 사용자 계정 컨트롤 창에서 <b>[예]</b>를 누르세요. 관리자로 열리면 <b>탭 이름 앞에 '관리자:'</b>가 붙습니다.
+        </div>
+        <div class="term">
+          <div class="term-bar"><div class="term-tab admin">관리자: Windows PowerShell</div></div>
+          <div class="term-body"><span class="p">PS C:\Windows\System32&gt; </span><span class="d">_</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>04 / 12</span></div>
+</section>
+
+<!-- 05 STEP 2 GIT -->
+<section class="slide">
+  <p class="kicker">STEP ② · GIT 설치</p>
+  <h1>명령 한 줄을 붙여넣고, 승인 창에서 [예]를 누릅니다</h1>
+  <div class="rule"></div>
+  <div class="body">
+    <div class="code">winget install --id Git.Git -e --accept-package-agreements --accept-source-agreements</div>
+    <div class="cols c2v" style="margin-top:16px">
+      <div>
+        <div class="term">
+          <div class="term-bar"><div class="term-tab">Windows PowerShell</div></div>
+          <div class="term-body"><span class="p">PS C:\Users\hong&gt; winget install --id Git.Git -e …</span>
+<span class="d">Found Git [Git.Git] Version 2.51.0.2
+Downloading https://github.com/git-for-windows/…
+  ████████████████████  65.0 MB / 65.0 MB
+Starting package install...</span>
+<span class="g">Successfully installed</span></div>
+          </div>
+        <p class="mocklabel">화면 예시 · 문구는 Windows 언어 설정에 따라 다름</p>
+      </div>
+      <div class="stack">
+        <div class="uac">
+          <div class="t">사용자 계정 컨트롤</div>
+          <div class="c"><b>이 앱이 디바이스를 변경할 수 있도록 허용하시겠어요?</b>Git for Windows</div>
+          <div class="btns"><span class="pri">예</span><span>아니요</span></div>
+        </div>
+        <div class="note">
+          <span class="h">Git은 왜 까나</span>
+          Git이 있으면 Claude Code가 <b>Git Bash로 명령을 실행</b>하고, 없으면 PowerShell로 대체됩니다. 필수는 아니지만 참고 자료 대부분이 Git 기준이라 깔아두는 편이 편합니다.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>05 / 12</span></div>
+</section>
+
+<!-- 06 STEP 3 CLAUDE -->
+<section class="slide">
+  <p class="kicker">STEP ③ · CLAUDE CODE 설치</p>
+  <h1>관리자 권한 없이, 한 줄이면 끝납니다</h1>
+  <div class="rule"></div>
+  <div class="body">
+    <div class="code">irm https://claude.ai/install.ps1 | iex</div>
+    <div class="cols c2" style="margin-top:16px">
+      <div>
+        <div class="term">
+          <div class="term-bar"><div class="term-tab">Windows PowerShell</div></div>
+          <div class="term-body"><span class="p">PS C:\Users\hong&gt; irm https://claude.ai/install.ps1 | iex</span>
+<span class="d">Downloading Claude Code …
+Installing to C:\Users\hong\.local\bin …</span>
+<span class="g">Claude Code 설치 완료</span>
+<span class="d">Run 'claude' to get started</span></div>
+        </div>
+        <p class="mocklabel">화면 예시 · 버전에 따라 문구가 다름</p>
+      </div>
+      <ul class="list">
+        <li><b>Node.js는 설치하지 않아도 됩니다.</b> Claude Code는 자체 실행 프로그램이라 별도 런타임 없이 동작합니다.</li>
+        <li>설치 위치는 <code>C:\Users\사용자명\.local\bin</code> — 내 계정 폴더 안이라 관리자 권한이 필요 없습니다.</li>
+        <li>이후 업데이트는 <b>백그라운드에서 자동</b>으로 이뤄집니다. 다시 설치할 필요가 없습니다.</li>
+        <li><span class="inl">irm</span>이 인식되지 않는다는 오류가 나면 지금 창이 <b>CMD</b>입니다. PowerShell을 열어 다시 실행하세요.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>06 / 12</span></div>
+</section>
+
+<!-- 07 STEP 4 RESTART -->
+<section class="slide">
+  <p class="kicker">STEP ④ · 반드시 거쳐야 하는 단계</p>
+  <h1>설치 직후에는 claude 명령을 못 찾습니다 — 창을 껐다 켜세요</h1>
+  <div class="rule"></div>
+  <div class="body">
+    <div class="cols c2" style="align-items:start">
+      <div>
+        <p class="h3">왜 그런가</p>
+        <ul class="list">
+          <li>설치 프로그램이 <b>claude의 위치를 Windows에 새로 등록</b>합니다.</li>
+          <li>그런데 <b>지금 열려 있는 PowerShell 창</b>은 열릴 때의 정보를 그대로 들고 있어서, 방금 등록된 위치를 모릅니다.</li>
+          <li>그래서 새 창을 열어야 갱신된 위치를 읽습니다. <b>설치가 잘못된 게 아닙니다.</b></li>
+        </ul>
+      </div>
+      <div>
+        <p class="h3">할 일</p>
+        <div class="steps">
+          <div class="step" style="grid-template-columns:34px 1fr"><span class="n">1</span><span class="t">지금 창을 <b>X</b>로 완전히 닫는다</span></div>
+          <div class="step" style="grid-template-columns:34px 1fr"><span class="n">2</span><span class="t">Win + X → <b>터미널</b>로 새로 연다</span></div>
+          <div class="step" style="grid-template-columns:34px 1fr"><span class="n">3</span><span class="t">새 창에서 다음 장의 확인을 진행한다</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="term" style="margin-top:20px">
+      <div class="term-bar"><div class="term-tab">Windows PowerShell</div></div>
+      <div class="term-body"><span class="p">PS C:\Users\hong&gt; claude --version</span>
+<span class="e">claude : 'claude' 용어가 cmdlet, 함수, 스크립트 파일 또는 실행할 수 있는 프로그램 이름으로 인식되지 않습니다.</span>
+<span class="d">→ 이 메시지가 보이면 십중팔구 이 단계를 건너뛴 것입니다. 창을 닫고 새로 여세요.</span></div>
+    </div>
+  </div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>07 / 12</span></div>
+</section>
+
+<!-- 08 STEP 5 VERIFY -->
+<section class="slide">
+  <p class="kicker">STEP ⑤ · 설치 확인</p>
+  <h1>새로 연 창에서 세 줄로 확인합니다</h1>
+  <div class="rule"></div>
+  <div class="body">
+    <div class="cols c2v">
+      <div class="term">
+        <div class="term-bar"><div class="term-tab">Windows PowerShell</div></div>
+        <div class="term-body"><span class="p">PS C:\Users\hong&gt; claude --version</span>
+<span class="g">2.1.252 (Claude Code)</span>
+
+<span class="p">PS C:\Users\hong&gt; git --version</span>
+<span class="g">git version 2.51.0.windows.1</span>
+
+<span class="p">PS C:\Users\hong&gt; claude doctor</span>
+<span class="d">Claude Code doctor
+
+Running: native (2.1.252)
+Platform: win32-x64
+Search: OK (bundled)
+Auto-updates: enabled</span>
+<span class="g">No installation issues found.</span></div>
+      </div>
+      <div>
+        <table>
+          <tr><th>명령</th><th>성공하면 나오는 것</th></tr>
+          <tr><td class="mono">claude --version</td><td><b>숫자로 된 버전</b><br><span style="color:var(--muted)">예: 2.1.252 (Claude Code)</span></td></tr>
+          <tr><td class="mono">git --version</td><td><b>git version 2.xx…</b></td></tr>
+          <tr><td class="mono">claude doctor</td><td><b>No installation issues found.</b><br><span style="color:var(--muted)">설치 상태를 점검만 하고 끝나는 명령</span></td></tr>
+        </table>
+        <div class="note" style="margin-top:16px">
+          버전 <b>숫자는 달라도 정상</b>입니다. 계속 업데이트되므로 자료의 숫자와 다르게 나오는 게 오히려 자연스럽습니다.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>08 / 12</span></div>
+</section>
+
+<!-- 09 STEP 6 LOGIN -->
+<section class="slide">
+  <p class="kicker">STEP ⑥ · 로그인</p>
+  <h1>작업할 폴더로 이동해서 claude 를 실행합니다</h1>
+  <div class="rule"></div>
+  <div class="body">
+    <div class="cols c2v">
+      <div class="term">
+        <div class="term-bar"><div class="term-tab">Windows PowerShell</div></div>
+        <div class="term-body"><span class="d"># 작업할 폴더로 이동</span>
+<span class="p">PS C:\Users\hong&gt; cd Documents\my-project</span>
+
+<span class="d"># Claude Code 실행</span>
+<span class="p">PS C:\Users\hong\Documents\my-project&gt; claude</span>
+
+<span class="y">브라우저에서 로그인을 완료해 주세요…</span>
+<span class="d">https://claude.ai/oauth/authorize?…</span></div>
+      </div>
+      <div>
+        <div class="steps">
+          <div class="step" style="grid-template-columns:34px 1fr"><span class="n">1</span><span class="t"><em>cd 폴더명</em> 으로 작업할 폴더로 이동</span></div>
+          <div class="step" style="grid-template-columns:34px 1fr"><span class="n">2</span><span class="t"><em>claude</em> 입력 후 Enter</span></div>
+          <div class="step" style="grid-template-columns:34px 1fr"><span class="n">3</span><span class="t">브라우저가 열리면 계정으로 로그인</span></div>
+          <div class="step" style="grid-template-columns:34px 1fr"><span class="n">4</span><span class="t">터미널로 돌아오면 대화 시작</span></div>
+        </div>
+        <div class="note" style="margin-top:16px">
+          <span class="h">유의</span>
+          Claude Code는 <b>Pro · Max · Team · Enterprise 계정</b>이 필요합니다. 무료 플랜으로는 실행되지 않습니다. 브라우저가 자동으로 열리지 않으면 <b>터미널에 표시된 주소를 복사해</b> 주소창에 붙여넣으세요.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>09 / 12</span></div>
+</section>
+
+<!-- 10 TROUBLESHOOT PATH -->
+<section class="slide">
+  <p class="kicker">문제 해결 · CLAUDE 명령을 못 찾을 때</p>
+  <h1>위에서부터 하나씩, 되는 순간 멈추면 됩니다</h1>
+  <div class="rule"></div>
+  <div class="body">
+    <table>
+      <tr><th style="width:30px">순</th><th style="width:215px">할 일</th><th style="width:335px">명령</th><th>확인</th></tr>
+      <tr><td style="color:var(--red)" class="mono">1</td><td><b>PowerShell을 완전히 닫고 새로 연다</b></td><td style="color:var(--muted)">창을 X로 닫고 Win + X → 터미널</td><td>대부분 여기서 해결됩니다</td></tr>
+      <tr><td style="color:var(--red)" class="mono">2</td><td>전체 경로로 직접 실행해 본다</td><td class="mono">&amp; "$env:USERPROFILE\.local\bin\claude.exe" --version</td><td>버전이 나오면 <b>설치는 성공</b>, 위치 등록만 안 된 상태</td></tr>
+      <tr><td style="color:var(--red)" class="mono">3</td><td>위치가 등록됐는지 확인한다</td><td class="mono">$env:PATH -split ';' | Select-String '.local'</td><td>아무것도 안 나오면 4번으로</td></tr>
+      <tr><td style="color:var(--red)" class="mono">4</td><td><b>PC를 재시작한다</b></td><td style="color:var(--muted)">—</td><td>컴퓨터 전체가 위치 정보를 다시 읽습니다</td></tr>
+      <tr><td style="color:var(--red)" class="mono">5</td><td>설치 명령을 한 번 더 실행한다</td><td class="mono">irm https://claude.ai/install.ps1 | iex</td><td>여러 번 실행해도 안전합니다</td></tr>
+    </table>
+    <div class="note" style="margin-top:18px">
+      2번에서 버전이 나온다면 설치 자체는 정상입니다. 이 경우 <b>1번과 4번</b>만으로 거의 해결됩니다.
+    </div>
+  </div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>10 / 12</span></div>
+</section>
+
+<!-- 11 ERRORS -->
+<section class="slide">
+  <p class="kicker">문제 해결 · 에러 메시지</p>
+  <h1>메시지를 그대로 보고 원인을 찾습니다</h1>
+  <div class="rule"></div>
+  <div class="body">
+    <table>
+      <tr><th style="width:365px">화면에 나온 메시지</th><th style="width:215px">원인</th><th>해결</th></tr>
+      <tr><td class="mono">'irm' 용어가 … 인식되지 않습니다</td><td>CMD에서 PowerShell 명령을 실행함</td><td>PowerShell을 열어 다시 실행</td></tr>
+      <tr><td class="mono">The token '&amp;&amp;' is not a valid statement separator</td><td>PowerShell에서 CMD 명령을 실행함</td><td><span class="inl">irm … | iex</span> 쪽 명령 사용</td></tr>
+      <tr><td class="mono">'claude' 용어가 … 인식되지 않습니다</td><td>창을 껐다 켜지 않음</td><td>07쪽 · 10쪽 순서대로 진행</td></tr>
+      <tr><td class="mono">'winget' 용어가 … 인식되지 않습니다</td><td>구형 Windows 10 — 앱 설치 관리자 없음</td><td>Microsoft Store에서 <b>앱 설치 관리자</b> 설치, 또는 <b>git-scm.com</b>에서 직접 내려받아 설치</td></tr>
+      <tr><td class="mono">액세스가 거부되었습니다 / 권한 오류</td><td>쓰기 권한 부족</td><td><b>터미널(관리자)</b>로 다시 열어 실행 (04쪽)</td></tr>
+      <tr><td class="mono">다운로드 실패 · 연결할 수 없음 · 403</td><td>사내망 방화벽·프록시 차단</td><td>다른 네트워크에서 시도하거나 IT 담당자에게 문의</td></tr>
+    </table>
+  </div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>11 / 12</span></div>
+</section>
+
+<!-- 12 CHECKLIST -->
+<section class="slide dark">
+  <p class="kicker">설치 완료 · CHECKLIST</p>
+  <h1 style="font-size:34px">이 세 가지가 나오면<br>준비 끝입니다</h1>
+  <div class="rule" style="background:#333;margin:20px 0 22px"></div>
+  <div class="body">
+    <div class="check">
+      <div><span class="b">✓</span><span>PowerShell에서 버전이 나온다<span class="m">claude --version → 2.1.xxx (Claude Code)</span></span></div>
+      <div><span class="b">✓</span><span>Git이 설치돼 있다<span class="m">git --version → git version 2.xx.x.windows.1</span></span></div>
+      <div><span class="b">✓</span><span>claude 실행 후 로그인까지 마쳤다<span class="m">claude → 브라우저 인증 → 대화 화면</span></span></div>
+    </div>
+    <p class="sub" style="margin-top:26px">막히는 지점이 있으면 10쪽 · 11쪽을 먼저 확인하고, 그래도 안 되면 화면을 캡처해서 문의해 주세요.</p>
+  </div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>12 / 12</span></div>
+</section>
+
+</div>
+
+<div class="deck" id="mac" hidden>
+
+<!-- 01 COVER -->
+<section class="slide dark cover">
+  <p class="kicker">사내 교육 자료 · CLAUDE CODE STUDY</p>
+  <h1>Claude Code 설치 가이드<br>macOS</h1>
+  <p class="sub">터미널에서 Git과 Claude Code를 설치하고, 설치를 확인하는 데까지 — 6단계.</p>
+  <div class="ring"></div>
+  <div class="meta">MACOS 13 VENTURA 이상 · 약 10분</div>
+  <div class="foot"><span>Claude Code 설치 가이드 · macOS</span><span>01 / 11</span></div>
+</section>
+
+<!-- 02 OVERVIEW -->
+<section class="slide">
+  <p class="kicker">설치 흐름 · OVERVIEW</p>
+  <h1>6단계, 직접 입력하는 명령은 두 줄뿐입니다</h1>
+  <div class="rule"></div>
+  <div class="body">
+    <div class="steps">
+      <div class="step"><span class="n">①</span><span class="t">터미널 열기</span><span class="d">Mac에 기본으로 들어 있습니다</span></div>
+      <div class="step"><span class="n">②</span><span class="t">Git 확인 — <em>git --version</em></span><span class="d">대부분 이미 깔려 있습니다</span></div>
+      <div class="step"><span class="n">③</span><span class="t">Claude Code 설치 — <em>curl … | bash</em></span><span class="d">sudo 없이 실행합니다</span></div>
+      <div class="step"><span class="n">④</span><span class="t">터미널 껐다 켜기</span><span class="d">건너뛰면 ⑤에서 막힙니다</span></div>
+      <div class="step"><span class="n">⑤</span><span class="t">설치 확인 — <em>claude --version</em></span><span class="d">버전 번호가 나오면 성공</span></div>
+      <div class="step"><span class="n">⑥</span><span class="t">로그인 — <em>claude</em></span><span class="d">브라우저로 계정 인증</span></div>
+    </div>
+    <div class="note" style="margin-top:18px">
+      <span class="h">관리자 권한</span>
+      Mac에서는 <b>관리자 권한(sudo)이 필요 없습니다.</b> 비밀번호를 물어보는 경우는 ②번에서 Git 도구를 새로 설치할 때 한 번뿐이고, 그때는 <b>Mac 로그인 비밀번호</b>를 입력하면 됩니다.
+    </div>
+  </div>
+  <div class="foot"><span>Claude Code 설치 가이드 · macOS</span><span>02 / 11</span></div>
+</section>
+
+<!-- 03 STEP 1 OPEN TERMINAL -->
+<section class="slide">
+  <p class="kicker">STEP ① · 터미널 열기</p>
+  <h1>Command + Space 를 누르고 '터미널'을 입력합니다</h1>
+  <div class="rule"></div>
+  <div class="body">
+    <div class="cols c2u">
+      <div class="stack">
+        <div class="spot">
+          <div class="q"><i>◎</i>터미널</div>
+          <div class="sec">상위 항목</div>
+          <div class="row hi">터미널 <span class="k">— 응용 프로그램</span></div>
+          <div class="row">터미널 설정 <span class="k">— 시스템 설정</span></div>
+        </div>
+        <p class="mocklabel">화면 예시 · Spotlight 검색</p>
+      </div>
+      <div class="stack">
+        <div class="mterm">
+          <div class="mterm-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="mterm-title">hong — -zsh — 80×24</span></div>
+          <div class="mterm-body">Last login: Mon Sep  1 09:14:22 on ttys000
+<span class="p">hong@MacBook-Pro ~ % </span><span class="d">_</span></div>
+        </div>
+        <div class="note">
+          <span class="h">이 화면이 나오면 준비 끝</span>
+          <b>%</b> 기호 뒤가 명령을 입력하는 자리입니다. 앞에 붙은 <span class="inl">hong@MacBook-Pro ~</span>는 사용자 이름과 현재 위치라서 <b>사람마다 다르게 보이는 게 정상</b>입니다.
+        </div>
+        <div class="note" style="border-color:#C9C9C9">
+          다음 장부터 나오는 명령은 <b><span class="inl">%</span> 뒤의 내용만</b> 복사해서 붙여넣으세요.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Claude Code 설치 가이드 · macOS</span><span>03 / 11</span></div>
+</section>
+
+<!-- 05 STEP 2 GIT -->
+<section class="slide">
+  <p class="kicker">STEP ② · GIT 확인 및 설치</p>
+  <h1>먼저 확인하고, 없을 때만 설치합니다</h1>
+  <div class="rule"></div>
+  <div class="body">
+    <div class="code">git --version</div>
+    <div class="cols c2" style="margin-top:16px">
+      <div class="stack">
+        <div class="mterm">
+          <div class="mterm-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="mterm-title">이미 설치돼 있는 경우</span></div>
+          <div class="mterm-body"><span class="p">% git --version</span>
+<span class="g">git version 2.48.1</span>
+<span class="d">→ 버전이 나오면 이 단계는 끝. 06쪽으로.</span></div>
+        </div>
+        <div class="note">
+          Mac에는 Git이 <b>이미 들어 있는 경우가 많습니다.</b> 위 명령으로 버전이 나오면 따로 설치할 필요가 없습니다.
+        </div>
+      </div>
+      <div class="stack">
+        <div class="mdlg">
+          <b>"git" 명령을 실행하려면 명령어 라인 개발자 도구가 필요합니다.</b>
+          <p>도구를 지금 설치하시겠습니까?</p>
+          <div class="btns"><span>취소</span><span>정보 더 보기</span><span class="pri">설치</span></div>
+        </div>
+        <p class="mocklabel">화면 예시 · Git이 없을 때 뜨는 창</p>
+        <div class="note">
+          <span class="h">이 창이 뜨면</span>
+          <b>[설치]</b>를 누르고 기다리면 됩니다. 비밀번호를 물어보면 <b>Mac 로그인 비밀번호</b>를 입력하세요 — 터미널에서는 <b>친 글자가 보이지 않는 것이 정상</b>입니다. 창이 뜨지 않는데 Git도 없다면 아래 명령을 실행하세요.
+        </div>
+        <div class="code" style="font-size:13px">xcode-select --install</div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Claude Code 설치 가이드 · macOS</span><span>04 / 11</span></div>
+</section>
+
+<!-- 06 STEP 3 INSTALL -->
+<section class="slide">
+  <p class="kicker">STEP ③ · CLAUDE CODE 설치</p>
+  <h1>sudo 없이, 한 줄이면 끝납니다</h1>
+  <div class="rule"></div>
+  <div class="body">
+    <div class="code">curl -fsSL https://claude.ai/install.sh | bash</div>
+    <div class="cols c2" style="margin-top:16px">
+      <div>
+        <div class="mterm">
+          <div class="mterm-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="mterm-title">hong — -zsh — 80×24</span></div>
+          <div class="mterm-body"><span class="p">% curl -fsSL https://claude.ai/install.sh | bash</span>
+<span class="d">Downloading Claude Code …
+Installing to /Users/hong/.local/bin …</span>
+<span class="g">Claude Code 설치 완료</span>
+<span class="d">Run 'claude' to get started</span></div>
+        </div>
+        <p class="mocklabel">화면 예시 · 버전에 따라 문구가 다름</p>
+      </div>
+      <ul class="list">
+        <li><b>Node.js는 설치하지 않아도 됩니다.</b> Claude Code는 자체 실행 프로그램이라 별도 런타임 없이 동작합니다.</li>
+        <li>설치 위치는 <code>~/.local/bin</code> — 내 홈 폴더 안이라 관리자 권한이 필요 없습니다. <b>앞에 sudo 를 붙이지 마세요.</b> 파일 주인이 관리자로 바뀌어 나중에 자동 업데이트가 실패합니다.</li>
+        <li>이후 업데이트는 <b>백그라운드에서 자동</b>으로 이뤄집니다. 다시 설치할 필요가 없습니다.</li>
+        <li>Homebrew를 이미 쓰고 있다면 <code>brew install --cask claude-code</code> 도 됩니다. 다만 이 방식은 <b>자동 업데이트가 안 되므로</b>, 처음이라면 위 명령을 권합니다.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot"><span>Claude Code 설치 가이드 · macOS</span><span>05 / 11</span></div>
+</section>
+
+<!-- 07 STEP 4 RESTART -->
+<section class="slide">
+  <p class="kicker">STEP ④ · 반드시 거쳐야 하는 단계</p>
+  <h1>설치 직후에는 claude 명령을 못 찾습니다 — 터미널을 껐다 켜세요</h1>
+  <div class="rule"></div>
+  <div class="body">
+    <div class="cols c2" style="align-items:start">
+      <div>
+        <p class="h3">왜 그런가</p>
+        <ul class="list">
+          <li>설치 프로그램이 <b>claude의 위치를 터미널 설정에 새로 기록</b>합니다.</li>
+          <li>그런데 <b>지금 열려 있는 창</b>은 열릴 때의 설정을 그대로 들고 있어서, 방금 기록된 위치를 모릅니다.</li>
+          <li>새 창을 열면 설정을 다시 읽습니다. <b>설치가 잘못된 게 아닙니다.</b></li>
+        </ul>
+      </div>
+      <div>
+        <p class="h3">할 일 — 위에서부터 하나만</p>
+        <div class="steps">
+          <div class="step" style="grid-template-columns:34px 1fr"><span class="n">1</span><span class="t"><span class="kbd">⌘ N</span> 새 창 또는 <span class="kbd">⌘ T</span> 새 탭을 연다</span></div>
+          <div class="step" style="grid-template-columns:34px 1fr"><span class="n">2</span><span class="t"><span class="kbd">⌘ Q</span> 로 터미널을 완전히 종료한 뒤 다시 연다</span></div>
+          <div class="step" style="grid-template-columns:34px 1fr"><span class="n">3</span><span class="t">지금 창에서 바로 반영하려면 <em>source ~/.zshrc</em></span></div>
+        </div>
+        <div class="note" style="margin-top:14px">
+          창의 <b>빨간 X 버튼</b>만 누르면 터미널 앱이 살아 있을 수 있습니다. 확실하게 하려면 <span class="kbd">⌘ Q</span>를 쓰세요.
+        </div>
+      </div>
+    </div>
+    <div class="mterm" style="margin-top:18px">
+      <div class="mterm-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="mterm-title">이 메시지가 나오는 경우</span></div>
+      <div class="mterm-body"><span class="p">% claude --version</span>
+<span class="e">zsh: command not found: claude</span>
+<span class="d">→ 십중팔구 이 단계를 건너뛴 것입니다. 새 창을 열고 다시 시도하세요.</span></div>
+    </div>
+  </div>
+  <div class="foot"><span>Claude Code 설치 가이드 · macOS</span><span>06 / 11</span></div>
+</section>
+
+<!-- 08 STEP 5 VERIFY -->
+<section class="slide">
+  <p class="kicker">STEP ⑤ · 설치 확인</p>
+  <h1>새로 연 창에서 세 줄로 확인합니다</h1>
+  <div class="rule"></div>
+  <div class="body">
+    <div class="cols c2v">
+      <div class="mterm">
+        <div class="mterm-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="mterm-title">hong — -zsh — 80×24</span></div>
+        <div class="mterm-body"><span class="p">% claude --version</span>
+<span class="g">2.1.252 (Claude Code)</span>
+
+<span class="p">% git --version</span>
+<span class="g">git version 2.48.1</span>
+
+<span class="p">% claude doctor</span>
+<span class="d">Claude Code doctor
+
+Running: native (2.1.252)
+Platform: darwin-arm64
+Search: OK (bundled)
+Auto-updates: enabled</span>
+<span class="g">No installation issues found.</span></div>
+      </div>
+      <div>
+        <table>
+          <tr><th>명령</th><th>성공하면 나오는 것</th></tr>
+          <tr><td class="mono">claude --version</td><td><b>숫자로 된 버전</b><br><span style="color:var(--muted)">예: 2.1.252 (Claude Code)</span></td></tr>
+          <tr><td class="mono">git --version</td><td><b>git version 2.xx.x</b></td></tr>
+          <tr><td class="mono">claude doctor</td><td><b>No installation issues found.</b><br><span style="color:var(--muted)">설치 상태를 점검만 하고 끝나는 명령</span></td></tr>
+        </table>
+        <div class="note" style="margin-top:16px">
+          버전 <b>숫자는 달라도 정상</b>입니다. 계속 업데이트되므로 자료의 숫자와 다르게 나오는 게 오히려 자연스럽습니다.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Claude Code 설치 가이드 · macOS</span><span>07 / 11</span></div>
+</section>
+
+<!-- 09 STEP 6 LOGIN -->
+<section class="slide">
+  <p class="kicker">STEP ⑥ · 로그인</p>
+  <h1>작업할 폴더로 이동해서 claude 를 실행합니다</h1>
+  <div class="rule"></div>
+  <div class="body">
+    <div class="cols c2v">
+      <div class="mterm">
+        <div class="mterm-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span><span class="mterm-title">hong — -zsh — 80×24</span></div>
+        <div class="mterm-body"><span class="d"># 작업할 폴더로 이동</span>
+<span class="p">% cd ~/Documents/my-project</span>
+
+<span class="d"># Claude Code 실행</span>
+<span class="p">% claude</span>
+
+<span class="y">브라우저에서 로그인을 완료해 주세요…</span>
+<span class="d">https://claude.ai/oauth/authorize?…</span></div>
+      </div>
+      <div>
+        <div class="steps">
+          <div class="step" style="grid-template-columns:34px 1fr"><span class="n">1</span><span class="t"><em>cd 폴더경로</em> 로 작업할 폴더로 이동</span></div>
+          <div class="step" style="grid-template-columns:34px 1fr"><span class="n">2</span><span class="t"><em>claude</em> 입력 후 <span class="kbd">return</span></span></div>
+          <div class="step" style="grid-template-columns:34px 1fr"><span class="n">3</span><span class="t">브라우저가 열리면 계정으로 로그인</span></div>
+          <div class="step" style="grid-template-columns:34px 1fr"><span class="n">4</span><span class="t">터미널로 돌아오면 대화 시작</span></div>
+        </div>
+        <div class="note" style="margin-top:16px">
+          <span class="h">유의</span>
+          Claude Code는 <b>Pro · Max · Team · Enterprise 계정</b>이 필요합니다. 무료 플랜으로는 실행되지 않습니다. 폴더 경로는 <b>Finder에서 폴더를 터미널 창으로 끌어다 놓으면</b> 자동으로 입력됩니다.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Claude Code 설치 가이드 · macOS</span><span>08 / 11</span></div>
+</section>
+
+<!-- 10 TROUBLESHOOT -->
+<section class="slide">
+  <p class="kicker">문제 해결 · CLAUDE 명령을 못 찾을 때</p>
+  <h1>위에서부터 하나씩, 되는 순간 멈추면 됩니다</h1>
+  <div class="rule"></div>
+  <div class="body">
+    <table>
+      <tr><th style="width:30px">순</th><th style="width:215px">할 일</th><th style="width:315px">명령</th><th>확인</th></tr>
+      <tr><td style="color:var(--red)" class="mono">1</td><td><b>새 창을 연다</b></td><td style="color:var(--muted)"><span class="kbd">⌘ N</span> 또는 <span class="kbd">⌘ T</span></td><td>대부분 여기서 해결됩니다</td></tr>
+      <tr><td style="color:var(--red)" class="mono">2</td><td>터미널을 완전히 껐다 켠다</td><td style="color:var(--muted)"><span class="kbd">⌘ Q</span> 후 다시 실행</td><td>창만 닫는 것과 다릅니다</td></tr>
+      <tr><td style="color:var(--red)" class="mono">3</td><td>전체 경로로 직접 실행해 본다</td><td class="mono">~/.local/bin/claude --version</td><td>버전이 나오면 <b>설치는 성공</b>, 위치 등록만 안 된 상태</td></tr>
+      <tr><td style="color:var(--red)" class="mono">4</td><td>설정을 지금 창에 바로 반영한다</td><td class="mono">source ~/.zshrc</td><td>3번이 됐다면 이걸로 해결됩니다</td></tr>
+      <tr><td style="color:var(--red)" class="mono">5</td><td>설치 명령을 한 번 더 실행한다</td><td class="mono">curl -fsSL https://claude.ai/install.sh | bash</td><td>여러 번 실행해도 안전합니다</td></tr>
+    </table>
+    <div class="note" style="margin-top:18px">
+      3번에서 버전이 나온다면 설치 자체는 정상입니다. 이 경우 <b>2번과 4번</b>만으로 거의 해결됩니다.
+    </div>
+  </div>
+  <div class="foot"><span>Claude Code 설치 가이드 · macOS</span><span>09 / 11</span></div>
+</section>
+
+<!-- 11 ERRORS -->
+<section class="slide">
+  <p class="kicker">문제 해결 · 에러 메시지</p>
+  <h1>메시지를 그대로 보고 원인을 찾습니다</h1>
+  <div class="rule"></div>
+  <div class="body">
+    <table>
+      <tr><th style="width:355px">화면에 나온 메시지</th><th style="width:220px">원인</th><th>해결</th></tr>
+      <tr><td class="mono">zsh: command not found: claude</td><td>터미널을 껐다 켜지 않음</td><td>06쪽 · 09쪽 순서대로 진행</td></tr>
+      <tr><td class="mono">xcrun: error: invalid active developer path</td><td>명령어 라인 개발자 도구 없음 또는 손상</td><td><span class="inl">xcode-select --install</span> 실행 후 재시도</td></tr>
+      <tr><td class="mono">Permission denied / 권한 관련 오류</td><td>sudo 를 붙여 설치했을 가능성</td><td>05쪽 확인 후, <b>sudo 없이</b> 설치 명령 재실행</td></tr>
+      <tr><td class="mono">curl: (6) Could not resolve host<br>curl: (7) Failed to connect · 403</td><td>사내망 방화벽·프록시 차단</td><td>다른 네트워크에서 시도하거나 IT 담당자에게 문의</td></tr>
+      <tr><td class="mono">로그인 브라우저가 열리지 않음</td><td>기본 브라우저 설정 문제</td><td>터미널에 표시된 <b>주소를 복사해</b> 브라우저 주소창에 붙여넣기</td></tr>
+    </table>
+    <div class="note" style="margin-top:18px">
+      <span class="h">참고</span>
+      Mac을 Apple 실리콘(M1 이상)과 인텔 중 무엇을 쓰든 <b>설치 명령은 동일</b>합니다. 설치 프로그램이 알아서 맞는 버전을 내려받습니다.
+    </div>
+  </div>
+  <div class="foot"><span>Claude Code 설치 가이드 · macOS</span><span>10 / 11</span></div>
+</section>
+
+<!-- 12 CHECKLIST -->
+<section class="slide dark">
+  <p class="kicker">설치 완료 · CHECKLIST</p>
+  <h1 style="font-size:34px">이 세 가지가 나오면<br>준비 끝입니다</h1>
+  <div class="rule" style="background:#333;margin:20px 0 22px"></div>
+  <div class="body">
+    <div class="check">
+      <div><span class="b">✓</span><span>터미널에서 버전이 나온다<span class="m">claude --version → 2.1.xxx (Claude Code)</span></span></div>
+      <div><span class="b">✓</span><span>Git이 설치돼 있다<span class="m">git --version → git version 2.xx.x</span></span></div>
+      <div><span class="b">✓</span><span>claude 실행 후 로그인까지 마쳤다<span class="m">claude → 브라우저 인증 → 대화 화면</span></span></div>
+    </div>
+    <p class="sub" style="margin-top:26px">막히는 지점이 있으면 09쪽 · 10쪽을 먼저 확인하고, 그래도 안 되면 화면을 캡처해서 문의해 주세요.</p>
+  </div>
+  <div class="foot"><span>Claude Code 설치 가이드 · macOS</span><span>11 / 11</span></div>
+</section>
+
+</div>
+
+<script>
+const fit = () => document.documentElement.style.setProperty(
+  '--z', Math.min(1, (window.innerWidth - 40) / 1000).toFixed(4));
+fit();
+addEventListener('resize', fit);
+
+const tabs = [...document.querySelectorAll('.tab')];
+tabs.forEach(btn => btn.addEventListener('click', () => {
+  tabs.forEach(b => {
+    const on = b === btn;
+    b.setAttribute('aria-selected', String(on));
+    document.getElementById(b.dataset.deck).hidden = !on;
+  });
+  scrollTo(0, 0);
+}));
+</script>
+
+</body>
+</html>
