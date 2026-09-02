@@ -72,6 +72,8 @@ td.mono,th.mono{font-family:var(--mono);font-size:12.5px}
 .step .t em{font-style:normal;font-family:var(--mono);font-size:12.5px;color:#3A3A3A;background:#F2F2F2;padding:1px 6px;border-radius:3px}
 .step .d{font-size:12.5px;color:var(--muted);text-align:right;max-width:330px;line-height:1.5}
 .h3 + .steps .step:first-child{border-top:0}
+.steps.fixed .step{grid-template-columns:34px 290px 1fr;padding:7px 0}
+.steps.fixed .step .d{text-align:left;max-width:none}
 
 .note{border-left:3px solid var(--red);padding:11px 0 11px 15px;font-size:13px;line-height:1.62;color:#2B2B2B;background:#FAFAFA}
 .note b{font-weight:700}
@@ -646,24 +648,20 @@ table.tight th{font-size:12px}
   <div class="rule"></div>
   <div class="body">
     <div class="code">git clone https://github.com/yujung7768903/blog-mission-for-claude-code-study.git</div>
-    <div class="cols c2v" style="margin-top:16px">
-      <div>
-        <p class="h3">순서</p>
-        <div class="steps">
-          <div class="step"><span class="n">①</span><span class="t">프로젝트를 둘 폴더로 이동</span><span class="d"><span class="inl">cd Desktop</span> 등 어디든 상관없음</span></div>
-          <div class="step"><span class="n">②</span><span class="t">위 <em>git clone</em> 명령을 붙여넣고 실행</span><span class="d">폴더가 하나 새로 생깁니다</span></div>
-          <div class="step"><span class="n">③</span><span class="t">새로 생긴 폴더로 이동</span><span class="d"><span class="inl">cd blog-mission-for-claude-code-study</span></span></div>
-          <div class="step"><span class="n">④</span><span class="t">그 자리에서 <em>claude</em> 실행</span><span class="d">여기서부터 Claude가 이 프로젝트를 봅니다</span></div>
-        </div>
+    <p class="h3" style="margin-top:12px">순서</p>
+    <div class="steps fixed">
+      <div class="step"><span class="n">①</span><span class="t">프로젝트를 둘 폴더로 이동</span><span class="d"><span class="inl">cd Desktop</span> 등 어디든 상관없음</span></div>
+      <div class="step"><span class="n">②</span><span class="t">위 <em>git clone</em> 명령을 붙여넣고 실행</span><span class="d">폴더가 하나 새로 생깁니다</span></div>
+      <div class="step"><span class="n">③</span><span class="t">새로 생긴 폴더로 이동</span><span class="d"><span class="inl">cd blog-mission-for-claude-code-study</span></span></div>
+      <div class="step"><span class="n">④</span><span class="t">그 자리에서 <em>claude</em> 실행</span><span class="d">여기서부터 Claude가 이 프로젝트를 봅니다</span></div>
+    </div>
+    <div class="stack" style="margin-top:10px;gap:8px">
+      <div class="note" style="padding:7px 0 7px 15px">
+        Claude Code는 <b>실행한 폴더</b>를 기준으로 일합니다. ③번을 건너뛰고 <span class="inl">claude</span>를 실행하면 엉뚱한 폴더를 보게 됩니다.
       </div>
-      <div class="stack">
-        <div class="note">
-          <span class="h">clone이 뭔가요</span>
-          GitHub에 올라가 있는 프로젝트 폴더를 <b>통째로 내 컴퓨터에 복사</b>하는 명령입니다. 압축파일 다운로드와 달리 <b>변경 이력까지</b> 함께 받아옵니다.
-        </div>
-        <div class="note" style="border-color:#C9C9C9">
-          Claude Code는 <b>실행한 폴더</b>를 기준으로 일합니다. ③번을 건너뛰고 <span class="inl">claude</span>를 실행하면 엉뚱한 폴더를 보게 됩니다.
-        </div>
+      <div class="note" style="border-color:#C9C9C9;padding:7px 0 7px 15px">
+        <span class="h" style="color:var(--muted)">clone이 뭔가요</span>
+        GitHub에 올라가 있는 프로젝트 폴더를 <b>통째로 내 컴퓨터에 복사</b>하는 명령입니다. 압축파일 다운로드와 달리 <b>변경 이력까지</b> 함께 받아옵니다.
       </div>
     </div>
   </div>
