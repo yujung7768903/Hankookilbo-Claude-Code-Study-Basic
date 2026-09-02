@@ -802,7 +802,7 @@ table.tight th{font-size:12px}
   <p class="sub">PowerShell로 Git과 Claude Code를 설치하고, 설치를 확인하는 데까지 — 6단계.</p>
   <div class="ring"></div>
   <div class="meta">WINDOWS 10 (1809+) / 11 · 약 15분</div>
-  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>01 / 12</span></div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>01 / 13</span></div>
 </section>
 
 <!-- 02 OVERVIEW -->
@@ -824,7 +824,7 @@ table.tight th{font-size:12px}
       Claude Code 설치 자체는 <b>관리자 권한이 필요 없습니다.</b> 승인 창이 뜨는 건 ②번 Git 설치 한 번뿐이고, 그때 <b>[예]</b>만 누르면 됩니다.
     </div>
   </div>
-  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>02 / 12</span></div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>02 / 13</span></div>
 </section>
 
 <!-- 03 POWERSHELL VS CMD -->
@@ -845,7 +845,7 @@ table.tight th{font-size:12px}
       Windows 10·11 모두 시작 메뉴에서 바로 찾을 수 있고, 설치 명령도 한 줄로 끝납니다. 명령을 붙여넣기 전에 <b>프롬프트 맨 앞에 <span class="inl">PS</span>가 있는지</b>만 확인하세요. <span class="inl">PS</span>가 없으면 CMD이므로, 위 표의 오른쪽 명령을 써야 합니다.
     </div>
   </div>
-  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>03 / 12</span></div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>03 / 13</span></div>
 </section>
 
 <!-- 04 STEP 1 OPEN -->
@@ -874,7 +874,7 @@ table.tight th{font-size:12px}
       </div>
     </div>
   </div>
-  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>04 / 12</span></div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>04 / 13</span></div>
 </section>
 
 <!-- 05 STEP 2 GIT -->
@@ -914,7 +914,7 @@ Starting package install...</span>
       </div>
     </div>
   </div>
-  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>05 / 12</span></div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>05 / 13</span></div>
 </section>
 
 <!-- 06 STEP 3 CLAUDE -->
@@ -944,7 +944,7 @@ Installing to C:\Users\hong\.local\bin …</span>
       </ul>
     </div>
   </div>
-  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>06 / 12</span></div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>06 / 13</span></div>
 </section>
 
 <!-- 07 STEP 4 RESTART -->
@@ -978,7 +978,7 @@ Installing to C:\Users\hong\.local\bin …</span>
 <span class="d">→ 이 메시지가 보이면 십중팔구 이 단계를 건너뛴 것입니다. 창을 닫고 새로 여세요.</span></div>
     </div>
   </div>
-  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>07 / 12</span></div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>07 / 13</span></div>
 </section>
 
 <!-- 08 STEP 5 VERIFY -->
@@ -1018,10 +1018,45 @@ Auto-updates: enabled</span>
       </div>
     </div>
   </div>
-  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>08 / 12</span></div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>08 / 13</span></div>
 </section>
 
-<!-- 09 STEP 6 LOGIN -->
+<!-- 09 STEP 5 WINGET -->
+<section class="slide">
+  <p class="kicker">STEP ⑤ · 확인에서 막혔다면</p>
+  <h1>창을 껐다 켰는데도 못 찾으면, winget으로 다시 설치합니다</h1>
+  <div class="rule"></div>
+  <div class="body">
+    <div class="code">winget install Anthropic.ClaudeCode</div>
+    <div class="cols c2v" style="margin-top:16px">
+      <div>
+        <div class="term">
+          <div class="term-bar"><div class="term-tab">Windows PowerShell</div></div>
+          <div class="term-body"><span class="p">PS C:\Users\hong&gt; claude --version</span>
+<span class="e">claude : 'claude' 용어가 cmdlet, 함수, 스크립트 파일 또는 실행할 수 있는 프로그램 이름으로 인식되지 않습니다.
+    + CategoryInfo          : ObjectNotFound: (claude:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException</span>
+<span class="d">→ 07쪽대로 새 창을 열어도 이 화면이면 위 명령으로 다시 설치</span></div>
+        </div>
+        <p class="mocklabel">이 화면이 계속 나올 때</p>
+      </div>
+      <div class="stack">
+        <div class="steps">
+          <div class="step" style="grid-template-columns:34px 1fr"><span class="n">1</span><span class="t">위 명령을 붙여넣고 실행 — 승인 창이 뜨면 <b>[예]</b></span></div>
+          <div class="step" style="grid-template-columns:34px 1fr"><span class="n">2</span><span class="t">PowerShell을 <b>X</b>로 닫고 새로 연다</span></div>
+          <div class="step" style="grid-template-columns:34px 1fr"><span class="n">3</span><span class="t"><em>claude --version</em> 다시 확인 — 나오면 ⑥으로</span></div>
+        </div>
+        <div class="note">
+          <span class="h">왜 이걸로 되나</span>
+          winget은 ②에서 Git을 설치할 때 쓴 <b>Windows 앱 설치 관리자</b>입니다. 설치와 <b>위치 등록을 함께</b> 처리하므로, 06쪽 방식으로 설치한 뒤 위치 등록이 안 된 PC에서 우회 방법으로 씁니다.
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>09 / 13</span></div>
+</section>
+
+<!-- 10 STEP 6 LOGIN -->
 <section class="slide">
   <p class="kicker">STEP ⑥ · 로그인</p>
   <h1>작업할 폴더로 이동해서 claude 를 실행합니다</h1>
@@ -1053,31 +1088,31 @@ Auto-updates: enabled</span>
       </div>
     </div>
   </div>
-  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>09 / 12</span></div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>10 / 13</span></div>
 </section>
 
-<!-- 10 TROUBLESHOOT PATH -->
+<!-- 11 TROUBLESHOOT PATH -->
 <section class="slide">
   <p class="kicker">문제 해결 · CLAUDE 명령을 못 찾을 때</p>
   <h1>위에서부터 하나씩, 되는 순간 멈추면 됩니다</h1>
   <div class="rule"></div>
   <div class="body">
     <table>
-      <tr><th style="width:30px">순</th><th style="width:215px">할 일</th><th style="width:335px">명령</th><th>확인</th></tr>
+      <tr><th style="width:30px">순</th><th style="width:250px">할 일</th><th style="width:380px">명령</th><th>확인</th></tr>
       <tr><td style="color:var(--red)" class="mono">1</td><td><b>PowerShell을 완전히 닫고 새로 연다</b></td><td style="color:var(--muted)">창을 X로 닫고 Win + X → 터미널</td><td>대부분 여기서 해결됩니다</td></tr>
-      <tr><td style="color:var(--red)" class="mono">2</td><td>전체 경로로 직접 실행해 본다</td><td class="mono">&amp; "$env:USERPROFILE\.local\bin\claude.exe" --version</td><td>버전이 나오면 <b>설치는 성공</b>, 위치 등록만 안 된 상태</td></tr>
-      <tr><td style="color:var(--red)" class="mono">3</td><td>위치가 등록됐는지 확인한다</td><td class="mono">$env:PATH -split ';' | Select-String '.local'</td><td>아무것도 안 나오면 4번으로</td></tr>
-      <tr><td style="color:var(--red)" class="mono">4</td><td><b>PC를 재시작한다</b></td><td style="color:var(--muted)">—</td><td>컴퓨터 전체가 위치 정보를 다시 읽습니다</td></tr>
-      <tr><td style="color:var(--red)" class="mono">5</td><td>설치 명령을 한 번 더 실행한다</td><td class="mono">irm https://claude.ai/install.ps1 | iex</td><td>여러 번 실행해도 안전합니다</td></tr>
+      <tr><td style="color:var(--red)" class="mono">2</td><td><b>winget으로 다시 설치한다</b></td><td class="mono">winget install Anthropic.ClaudeCode</td><td>09쪽 · 새 창을 열어 다시 확인</td></tr>
+      <tr><td style="color:var(--red)" class="mono">3</td><td>전체 경로로 직접 실행해 본다</td><td class="mono">&amp; "$env:USERPROFILE\.local\bin\claude.exe"<br>--version</td><td>버전이 나오면 <b>설치는 성공</b>, 위치 등록만 안 된 상태</td></tr>
+      <tr><td style="color:var(--red)" class="mono">4</td><td>위치가 등록됐는지 확인한다</td><td class="mono">$env:PATH -split ';' | Select-String '.local'</td><td>아무것도 안 나오면 5번으로</td></tr>
+      <tr><td style="color:var(--red)" class="mono">5</td><td><b>PC를 재시작한다</b></td><td style="color:var(--muted)">—</td><td>컴퓨터 전체가 위치 정보를 다시 읽습니다</td></tr>
     </table>
-    <div class="note" style="margin-top:18px">
-      2번에서 버전이 나온다면 설치 자체는 정상입니다. 이 경우 <b>1번과 4번</b>만으로 거의 해결됩니다.
+    <div class="note" style="margin-top:12px">
+      3번에서 버전이 나온다면 설치 자체는 정상입니다. 이 경우 <b>1번과 5번</b>만으로 거의 해결됩니다.
     </div>
   </div>
-  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>10 / 12</span></div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>11 / 13</span></div>
 </section>
 
-<!-- 11 ERRORS -->
+<!-- 12 ERRORS -->
 <section class="slide">
   <p class="kicker">문제 해결 · 에러 메시지</p>
   <h1>메시지를 그대로 보고 원인을 찾습니다</h1>
@@ -1087,16 +1122,16 @@ Auto-updates: enabled</span>
       <tr><th style="width:365px">화면에 나온 메시지</th><th style="width:215px">원인</th><th>해결</th></tr>
       <tr><td class="mono">'irm' 용어가 … 인식되지 않습니다</td><td>CMD에서 PowerShell 명령을 실행함</td><td>PowerShell을 열어 다시 실행</td></tr>
       <tr><td class="mono">The token '&amp;&amp;' is not a valid statement separator</td><td>PowerShell에서 CMD 명령을 실행함</td><td><span class="inl">irm … | iex</span> 쪽 명령 사용</td></tr>
-      <tr><td class="mono">'claude' 용어가 … 인식되지 않습니다</td><td>창을 껐다 켜지 않음</td><td>07쪽 · 10쪽 순서대로 진행</td></tr>
+      <tr><td class="mono">'claude' 용어가 … 인식되지 않습니다</td><td>창을 껐다 켜지 않음, 또는 설치 위치 등록 실패</td><td>07쪽 → 09쪽 → 11쪽 순서대로 진행</td></tr>
       <tr><td class="mono">'winget' 용어가 … 인식되지 않습니다</td><td>구형 Windows 10 — 앱 설치 관리자 없음</td><td>Microsoft Store에서 <b>앱 설치 관리자</b> 설치, 또는 <b>git-scm.com</b>에서 직접 내려받아 설치</td></tr>
       <tr><td class="mono">액세스가 거부되었습니다 / 권한 오류</td><td>쓰기 권한 부족</td><td><b>터미널(관리자)</b>로 다시 열어 실행 (04쪽)</td></tr>
       <tr><td class="mono">다운로드 실패 · 연결할 수 없음 · 403</td><td>사내망 방화벽·프록시 차단</td><td>다른 네트워크에서 시도하거나 IT 담당자에게 문의</td></tr>
     </table>
   </div>
-  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>11 / 12</span></div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>12 / 13</span></div>
 </section>
 
-<!-- 12 CHECKLIST -->
+<!-- 13 CHECKLIST -->
 <section class="slide dark">
   <p class="kicker">설치 완료 · CHECKLIST</p>
   <h1 style="font-size:34px">이 세 가지가 나오면<br>준비 끝입니다</h1>
@@ -1107,9 +1142,9 @@ Auto-updates: enabled</span>
       <div><span class="b">✓</span><span>Git이 설치돼 있다<span class="m">git --version → git version 2.xx.x.windows.1</span></span></div>
       <div><span class="b">✓</span><span>claude 실행 후 로그인까지 마쳤다<span class="m">claude → 브라우저 인증 → 대화 화면</span></span></div>
     </div>
-    <p class="sub" style="margin-top:26px">막히는 지점이 있으면 10쪽 · 11쪽을 먼저 확인하고, 그래도 안 되면 화면을 캡처해서 문의해 주세요.</p>
+    <p class="sub" style="margin-top:26px">막히는 지점이 있으면 11쪽 · 12쪽을 먼저 확인하고, 그래도 안 되면 화면을 캡처해서 문의해 주세요.</p>
   </div>
-  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>12 / 12</span></div>
+  <div class="foot"><span>Claude Code 설치 가이드 · Windows</span><span>13 / 13</span></div>
 </section>
 
 </div>
