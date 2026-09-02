@@ -1119,7 +1119,7 @@ Auto-updates: enabled</span>
 <!-- 06 STEP 3 INSTALL -->
 <section class="slide">
   <p class="kicker">STEP ③ · CLAUDE CODE 설치</p>
-  <h1>sudo 없이, 한 줄이면 끝납니다</h1>
+  <h1>명령 한 줄이면 설치가 끝납니다</h1>
   <div class="rule"></div>
   <div class="body">
     <div class="code">curl -fsSL https://claude.ai/install.sh | bash</div>
@@ -1137,7 +1137,7 @@ Installing to /Users/hong/.local/bin …</span>
       </div>
       <ul class="list">
         <li><b>Node.js는 설치하지 않아도 됩니다.</b> Claude Code는 자체 실행 프로그램이라 별도 런타임 없이 동작합니다.</li>
-        <li>설치 위치는 <code>~/.local/bin</code> — 내 홈 폴더 안이라 관리자 권한이 필요 없습니다. <b>앞에 sudo 를 붙이지 마세요.</b> 파일 주인이 관리자로 바뀌어 나중에 자동 업데이트가 실패합니다.</li>
+        <li>설치 위치는 <code>~/.local/bin</code> — <b>내 홈 폴더 안</b>이라 별도 권한 없이 그대로 설치됩니다.</li>
         <li>이후 업데이트는 <b>백그라운드에서 자동</b>으로 이뤄집니다. 다시 설치할 필요가 없습니다.</li>
         <li>Homebrew를 이미 쓰고 있다면 <code>brew install --cask claude-code</code> 도 됩니다. 다만 이 방식은 <b>자동 업데이트가 안 되므로</b>, 처음이라면 위 명령을 권합니다.</li>
       </ul>
@@ -1289,7 +1289,7 @@ Auto-updates: enabled</span>
       <tr><th style="width:355px">화면에 나온 메시지</th><th style="width:220px">원인</th><th>해결</th></tr>
       <tr><td class="mono">zsh: command not found: claude</td><td>터미널을 껐다 켜지 않음</td><td>06쪽 · 09쪽 순서대로 진행</td></tr>
       <tr><td class="mono">xcrun: error: invalid active developer path</td><td>명령어 라인 개발자 도구 없음 또는 손상</td><td><span class="inl">xcode-select --install</span> 실행 후 재시도</td></tr>
-      <tr><td class="mono">Permission denied / 권한 관련 오류</td><td>sudo 를 붙여 설치했을 가능성</td><td>05쪽 확인 후, <b>sudo 없이</b> 설치 명령 재실행</td></tr>
+      <tr><td class="mono">Permission denied / 권한 관련 오류</td><td>sudo 를 붙여 설치했을 가능성</td><td>02쪽 확인 후, <b>명령 앞에 아무것도 붙이지 말고</b> 재실행</td></tr>
       <tr><td class="mono">curl: (6) Could not resolve host<br>curl: (7) Failed to connect · 403</td><td>사내망 방화벽·프록시 차단</td><td>다른 네트워크에서 시도하거나 IT 담당자에게 문의</td></tr>
       <tr><td class="mono">로그인 브라우저가 열리지 않음</td><td>기본 브라우저 설정 문제</td><td>터미널에 표시된 <b>주소를 복사해</b> 브라우저 주소창에 붙여넣기</td></tr>
     </table>
