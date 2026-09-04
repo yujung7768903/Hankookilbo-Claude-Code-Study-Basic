@@ -626,16 +626,23 @@ table.tight th{font-size:12px}
           <tr><td class="mono">/exit</td><td>세션 종료 (별칭 /quit)</td></tr>
           <tr><td class="mono">/compact</td><td>대화 압축</td></tr>
         </table>
+        <p class="note" style="margin-top:16px"><span class="h">/compact</span>대화가 길어지면 답변 정확도가 떨어집니다. 원본은 디스크에 남아 있어 필요할 때 다시 볼 수 있습니다.</p>
       </div>
       <div>
-        <p class="h3">이동 관련 키</p>
+        <p class="h3">입력창 · 모드 키</p>
         <table class="tight">
           <tr><td class="mono" style="width:38%">Ctrl+J</td><td>제출하지 않고 줄바꿈만 삽입</td></tr>
-          <tr><td class="mono">Ctrl+A</td><td>커서를 줄 맨 앞으로</td></tr>
-          <tr><td class="mono">Ctrl+E</td><td>커서를 줄 맨 끝으로</td></tr>
+          <tr><td class="mono">Ctrl+A / Ctrl+E</td><td>커서를 줄 맨 앞 / 맨 끝으로</td></tr>
           <tr><td class="mono">↑ / ↓</td><td>입력했던 프롬프트 기록 탐색</td></tr>
+          <tr><td class="mono">Shift+Tab</td><td><b>권한 모드 전환</b> · 안 먹으면 Alt+M</td></tr>
         </table>
-        <p class="note" style="margin-top:16px"><span class="h">/compact</span>대화가 길어지면 답변 정확도가 떨어집니다. 원본은 디스크에 남아 있어 필요할 때 다시 볼 수 있습니다.</p>
+        <p class="h3" style="margin-top:10px">권한 모드 · Shift+Tab 으로 순환</p>
+        <table class="tight">
+          <tr><td class="mono" style="width:38%">Manual</td><td>기본값. 실행·수정 전에 매번 물어봄</td></tr>
+          <tr><td class="mono">Accept Edits</td><td>파일 수정은 안 묻고 바로 반영</td></tr>
+          <tr><td class="mono">Plan</td><td>읽기만 하고 계획 먼저, 수정 없음</td></tr>
+          <tr><td class="mono">Auto</td><td>안전 검사 통과한 작업은 안 묻고 진행</td></tr>
+        </table>
       </div>
     </div>
   </div>
